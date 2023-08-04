@@ -1,7 +1,7 @@
-<?php namespace JBonnyDev\UserPermissions\FormWidgets;
+<?php namespace Ladylain\UserPermissions\FormWidgets;
 
 use Backend\Classes\FormWidgetBase;
-use JBonnyDev\UserPermissions\Models\Permission as PermissionModel;
+use Ladylain\UserPermissions\Models\Permission as PermissionModel;
 /*
  * This is a modified version of the OctoberCMS backend permissions editor, see
  * the original file here:

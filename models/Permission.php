@@ -1,4 +1,4 @@
-<?php namespace JBonnyDev\UserPermissions\Models;
+<?php namespace Ladylain\UserPermissions\Models;
 
 use Model;
 use Rainlab\User\Models\User as UserModel;
@@ -12,7 +12,7 @@ class Permission extends Model
      *
      * @var string
      */
-    protected $table = 'jbonnydev_userpermissions_permissions';
+    protected $table = 'ladylain_userpermissions_permissions';
 
     /*
      * Validation
@@ -23,14 +23,14 @@ class Permission extends Model
 
     public $belongsToMany = [
         'users' => ['Rainlab\User\Models\User',
-            'table' => 'jbonnydev_userpermissions_user_permission',
+            'table' => 'ladylain_userpermissions_user_permission',
             'key' => 'permission_id',
             'otherKey' => 'user_id',
             'timestamps' => true,
             'pivot' => ['permission_state'],
         ],
         'groups' => ['Rainlab\User\Models\UserGroup',
-            'table' => 'jbonnydev_userpermissions_group_permission',
+            'table' => 'ladylain_userpermissions_group_permission',
             'key' => 'permission_id',
             'otherKey' => 'group_id',
             'timestamps' => true,

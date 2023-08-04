@@ -4,23 +4,23 @@
 
 fields:
     id:
-        label: jbonnydev.userpermissions::lang.permission.model_id
+        label: ladylain.userpermissions::lang.permission.model_id
         type: text
         cssClass: form-id
         description: Id of the permission
         disabled: true
 
     code:
-        label: jbonnydev.userpermissions::lang.permission.model_code
+        label: ladylain.userpermissions::lang.permission.model_code
         type: text
         cssClass: form-code
         description: Code for the permission
-        comment: jbonnydev.userpermissions::lang.permission.model_code_comment
+        comment: ladylain.userpermissions::lang.permission.model_code_comment
         attributes:
             maxlength: 128
 
     name:
-        label: jbonnydev.userpermissions::lang.permission.model_name
+        label: ladylain.userpermissions::lang.permission.model_name
         type: text
         cssClass: form-name
         description: Name of the permission
@@ -29,7 +29,7 @@ fields:
             maxlength: 128
 
     description:
-        label: jbonnydev.userpermissions::lang.permission.model_desc
+        label: ladylain.userpermissions::lang.permission.model_desc
         type: textarea
         cssClass: form-desc
         description: Description of the permission

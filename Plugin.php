@@ -1,9 +1,9 @@
-<?php namespace JBonnyDev\UserPermissions;
+<?php namespace Ladylain\UserPermissions;
 
 use Exception;
 use Event;
 use Backend;
-use JBonnyDev\UserPermissions\Models\Permission as PermissionModel;
+use Ladylain\UserPermissions\Models\Permission as PermissionModel;
 use Rainlab\User\Models\User as UserModel;
 use Rainlab\User\Models\UserGroup as UserGroupModel;
 use October\Rain\Exception\ApplicationException;
@@ -21,8 +21,8 @@ class Plugin extends \System\Classes\PluginBase
     public function pluginDetails()
     {
         return [
-            'name' => 'jbonnydev.userpermissions::lang.plugin.name',
-            'description' => 'jbonnydev.userpermissions::lang.plugin.description',
+            'name' => 'ladylain.userpermissions::lang.plugin.name',
+            'description' => 'ladylain.userpermissions::lang.plugin.description',
             'author' => 'JoakimBo',
             'icon' => 'icon-unlock-alt'
         ];
@@ -41,17 +41,17 @@ class Plugin extends \System\Classes\PluginBase
     public function registerPermissions()
     {
         return [
-            'jbonnydev.userpermissions.access_permissions' => [
-                'tab'   => 'jbonnydev.userpermissions::lang.plugin.tab',
-                'label' => 'jbonnydev.userpermissions::lang.plugin.access_permissions'
+            'ladylain.userpermissions.access_permissions' => [
+                'tab'   => 'ladylain.userpermissions::lang.plugin.tab',
+                'label' => 'ladylain.userpermissions::lang.plugin.access_permissions'
             ],
-            'jbonnydev.userpermissions.access_user_permissions' => [
-                'tab'   => 'jbonnydev.userpermissions::lang.plugin.tab',
-                'label' => 'jbonnydev.userpermissions::lang.plugin.access_user_permissions'
+            'ladylain.userpermissions.access_user_permissions' => [
+                'tab'   => 'ladylain.userpermissions::lang.plugin.tab',
+                'label' => 'ladylain.userpermissions::lang.plugin.access_user_permissions'
             ],
-            'jbonnydev.userpermissions.access_group_permissions' => [
-                'tab'   => 'jbonnydev.userpermissions::lang.plugin.tab',
-                'label' => 'jbonnydev.userpermissions::lang.plugin.access_group_permissions'
+            'ladylain.userpermissions.access_group_permissions' => [
+                'tab'   => 'ladylain.userpermissions::lang.plugin.tab',
+                'label' => 'ladylain.userpermissions::lang.plugin.access_group_permissions'
             ],
         ];
     }
@@ -61,10 +61,10 @@ class Plugin extends \System\Classes\PluginBase
         Event::listen('backend.menu.extendItems', function($manager) {
             $manager->addSideMenuItems('RainLab.User', 'user', [
                 'permissions' => [
-                    'label' => 'jbonnydev.userpermissions::lang.permissions.menu_label',
+                    'label' => 'ladylain.userpermissions::lang.permissions.menu_label',
                     'icon' => 'icon-unlock-alt',
-                    'permissions' => ['jbonnydev.userpermissions.access_permissions'],
-                    'url' => Backend::url('jbonnydev/userpermissions/permissions'),
+                    'permissions' => ['ladylain.userpermissions.access_permissions'],
+                    'url' => Backend::url('ladylain/userpermissions/permissions'),
                 ]
             ]);
         });
@@ -76,29 +76,29 @@ class Plugin extends \System\Classes\PluginBase
             if (!$model->is_activated) {
                 return [];
             }
-            $groupPermissionsQuery = $model->user_permissions()->where('jbonnydev_userpermissions_user_permission.permission_state', 2)
-            ->join('users_groups', 'jbonnydev_userpermissions_user_permission.user_id', '=', 'users_groups.user_id')
-            ->join('jbonnydev_userpermissions_group_permission', function ($join) {
-                $join->on('users_groups.user_group_id', '=', 'jbonnydev_userpermissions_group_permission.group_id')
+            $groupPermissionsQuery = $model->user_permissions()->where('ladylain_userpermissions_user_permission.permission_state', 2)
+            ->join('users_groups', 'ladylain_userpermissions_user_permission.user_id', '=', 'users_groups.user_id')
+            ->join('ladylain_userpermissions_group_permission', function ($join) {
+                $join->on('users_groups.user_group_id', '=', 'ladylain_userpermissions_group_permission.group_id')
                 ->on(
-                    'jbonnydev_userpermissions_group_permission.permission_id',
+                    'ladylain_userpermissions_group_permission.permission_id',
                     '=',
-                    'jbonnydev_userpermissions_user_permission.permission_id'
+                    'ladylain_userpermissions_user_permission.permission_id'
                 )
-                ->where('jbonnydev_userpermissions_group_permission.permission_state', '=', 1);
+                ->where('ladylain_userpermissions_group_permission.permission_state', '=', 1);
             })
-            ->join('jbonnydev_userpermissions_permissions as permissions',
-                'jbonnydev_userpermissions_group_permission.permission_id',
+            ->join('ladylain_userpermissions_permissions as permissions',
+                'ladylain_userpermissions_group_permission.permission_id',
                 '=',
                 'permissions.id'
             )->select(
                 'permissions.id',
                 'permissions.code',
-                'jbonnydev_userpermissions_user_permission.user_id',
-                'jbonnydev_userpermissions_user_permission.permission_id',
-                'jbonnydev_userpermissions_user_permission.permission_state',
-                'jbonnydev_userpermissions_user_permission.created_at',
-                'jbonnydev_userpermissions_user_permission.updated_at'
+                'ladylain_userpermissions_user_permission.user_id',
+                'ladylain_userpermissions_user_permission.permission_id',
+                'ladylain_userpermissions_user_permission.permission_state',
+                'ladylain_userpermissions_user_permission.created_at',
+                'ladylain_userpermissions_user_permission.updated_at'
             );
             $permissionsQueryResult = $model->user_permissions()->select('id', 'code')->where('permission_state', 1)->union($groupPermissionsQuery)->get();
             if (!$permissionsQueryResult) {
@@ -136,8 +136,8 @@ class Plugin extends \System\Classes\PluginBase
         UserModel::extend(function($model)
         {
             $model->belongsToMany['user_permissions'] = [
-                'JBonnyDev\UserPermissions\Models\Permission',
-                'table' => 'jbonnydev_userpermissions_user_permission',
+                'Ladylain\UserPermissions\Models\Permission',
+                'table' => 'ladylain_userpermissions_user_permission',
                 'key' => 'user_id',
                 'otherKey' => 'permission_id',
                 'timestamps' => true,
@@ -174,7 +174,7 @@ class Plugin extends \System\Classes\PluginBase
                 }
                 return false;
             });
-            $model->addDynamicMethod(Config::get('jbonnydev.userpermissions::hasUserPermissionAlias', 'hasUserPermissionAlias'), function($permissionsInput, $match = 'all') use ($model) {
+            $model->addDynamicMethod(Config::get('ladylain.userpermissions::hasUserPermissionAlias', 'hasUserPermissionAlias'), function($permissionsInput, $match = 'all') use ($model) {
                 return $model->hasUserPermission($permissionsInput, $match);
             });
         });
@@ -183,8 +183,8 @@ class Plugin extends \System\Classes\PluginBase
     protected function extendUserGroupModel()
     {
         UserGroupModel::extend(function($model) {
-            $model->belongsToMany['user_permissions'] = ['JBonnyDev\UserPermissions\Models\Permission',
-                'table' => 'jbonnydev_userpermissions_group_permission',
+            $model->belongsToMany['user_permissions'] = ['Ladylain\UserPermissions\Models\Permission',
+                'table' => 'ladylain_userpermissions_group_permission',
                 'key' => 'group_id',
                 'otherKey' => 'permission_id',
                 'timestamps' => true,
@@ -213,10 +213,10 @@ class Plugin extends \System\Classes\PluginBase
                 return;
             }
             // only add field if backend user has access
-            if (BackendAuth::getUser()->hasAccess('jbonnydev.userpermissions.access_user_permissions')) {
+            if (BackendAuth::getUser()->hasAccess('ladylain.userpermissions.access_user_permissions')) {
                 $widget->addTabFields([
                     'user_permissions' => [
-                        'tab'   => 'jbonnydev.userpermissions::lang.permissions.menu_label',
+                        'tab'   => 'ladylain.userpermissions::lang.permissions.menu_label',
                         'type'    => 'userpermissioneditor',
                         'mode' => 'radio',
                         'context' => ['create','preview','update'],
@@ -238,10 +238,10 @@ class Plugin extends \System\Classes\PluginBase
                 return;
             }
             // only add field if backend user has access
-            if (BackendAuth::getUser()->hasAccess('jbonnydev.userpermissions.access_group_permissions')) {
+            if (BackendAuth::getUser()->hasAccess('ladylain.userpermissions.access_group_permissions')) {
                 $widget->addTabFields([
                     'user_permissions' => [
-                        'tab'   => 'jbonnydev.userpermissions::lang.permissions.menu_label',
+                        'tab'   => 'ladylain.userpermissions::lang.permissions.menu_label',
                         'type'    => 'userpermissioneditor',
                         'mode' => 'checkbox',
                         'context' => ['create','preview','update'],
@@ -254,7 +254,7 @@ class Plugin extends \System\Classes\PluginBase
     public function registerFormWidgets()
     {
         return [
-            'JBonnyDev\UserPermissions\FormWidgets\UserPermissionEditor' => 'userpermissioneditor',
+            'Ladylain\UserPermissions\FormWidgets\UserPermissionEditor' => 'userpermissioneditor',
         ];
     }
 }

@@ -2,10 +2,10 @@
 #  List Behavior Config
 # ===================================
 
-title: jbonnydev.userpermissions::lang.permissions.menu_label
-list: ~/plugins/jbonnydev/userpermissions/models/permission/columns.yaml
-modelClass: JBonnyDev\UserPermissions\Models\Permission
-recordUrl: jbonnydev/userpermissions/permissions/update/:id
+title: ladylain.userpermissions::lang.permissions.menu_label
+list: ~/plugins/ladylain/userpermissions/models/permission/columns.yaml
+modelClass: Ladylain\UserPermissions\Models\Permission
+recordUrl: ladylain/userpermissions/permissions/update/:id
 
 noRecordsMessage: backend::lang.list.no_records
 

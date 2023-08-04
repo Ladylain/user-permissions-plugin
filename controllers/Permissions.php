@@ -1,4 +1,4 @@
-<?php namespace JBonnyDev\UserPermissions\Controllers;
+<?php namespace Ladylain\UserPermissions\Controllers;
 
 use BackendMenu;
 use Rainlab\User\Models\User as UserModel;
@@ -7,7 +7,7 @@ use Rainlab\User\Models\UserGroup as UserGroupModel;
 class Permissions extends \Backend\Classes\Controller
 {
     public $requiredPermissions = [
-        'jbonnydev.userpermissions.access_permissions'
+        'ladylain.userpermissions.access_permissions'
     ];
 
     public $implement = [
@@ -23,6 +23,6 @@ class Permissions extends \Backend\Classes\Controller
     {
         parent::__construct();
         BackendMenu::setContext('RainLab.User', 'user', 'permissions');
-        $this->addCss('/plugins/JBonnyDev/userpermissions/assets/css/form.css');
+        $this->addCss('/plugins/Ladylain/userpermissions/assets/css/form.css');
     }
 }

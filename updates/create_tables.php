@@ -1,4 +1,4 @@
-<?php namespace JBonnyDev\UserPermissions\Updates;
+<?php namespace Ladylain\UserPermissions\Updates;
 
 use Schema;
 use October\Rain\Database\Updates\Migration;
@@ -7,7 +7,7 @@ class CreateTables extends Migration
 {
     public function up()
     {
-        Schema::create('jbonnydev_userpermissions_permissions', function($table)
+        Schema::create('ladylain_userpermissions_permissions', function($table)
         {
             $table->engine = 'InnoDB';
             $table->increments('id');
@@ -17,7 +17,7 @@ class CreateTables extends Migration
             $table->timestamps();
         });
 
-        Schema::create('jbonnydev_userpermissions_user_permission', function($table)
+        Schema::create('ladylain_userpermissions_user_permission', function($table)
         {
             $table->engine = 'InnoDB';
             $table->integer('user_id')->unsigned();
@@ -27,7 +27,7 @@ class CreateTables extends Migration
             $table->timestamps();
         });
 
-        Schema::create('jbonnydev_userpermissions_group_permission', function($table)
+        Schema::create('ladylain_userpermissions_group_permission', function($table)
         {
             $table->engine = 'InnoDB';
             $table->integer('group_id')->unsigned();
@@ -39,8 +39,8 @@ class CreateTables extends Migration
     }
     public function down()
     {
-        Schema::dropIfExists('jbonnydev_userpermissions_group_permission');
-        Schema::dropIfExists('jbonnydev_userpermissions_user_permission');
-        Schema::dropIfExists('jbonnydev_userpermissions_permissions');
+        Schema::dropIfExists('ladylain_userpermissions_group_permission');
+        Schema::dropIfExists('ladylain_userpermissions_user_permission');
+        Schema::dropIfExists('ladylain_userpermissions_permissions');
     }
 }
