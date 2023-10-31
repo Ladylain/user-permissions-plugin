@@ -1,5 +1,5 @@
 {
-    "name": "ladylain/user-permissions-plugin",
+    "name": "ladylain/userpermissions-plugin",
     "type": "october-plugin",
     "description": "Front-end user permissions management.",
     "require": {
