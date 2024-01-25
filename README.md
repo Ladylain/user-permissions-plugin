@@ -63,8 +63,11 @@ Available UserPermissions functions:
         <...>
     }
 
+The hasUserPermission() function creates a new query each time it's put into the code.
 
-Add new dynamicMethod to get all permissions in one request to optimize performances. 
+To optimize this, you could use the following function:
+- New dynamicMethod to get all permissions in one request to optimize performances. 
+> Tips: Call this function one time at the top of the page and store it into a variable (ex. {% set userpermissions= user.getUserPermissions() %})
 
     /*
      *
@@ -75,6 +78,9 @@ Add new dynamicMethod to get all permissions in one request to optimize performa
     function getUserPermissions(){
         <...>
     }
+
+
+
 Since every user model is extended with the same function it is available in both twig and backend php i.e.
 
 **For Twig**
