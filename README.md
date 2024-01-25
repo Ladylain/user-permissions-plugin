@@ -63,6 +63,18 @@ Available UserPermissions functions:
         <...>
     }
 
+
+Add new dynamicMethod to get all permissions in one request to optimize performances. 
+
+    /*
+     *
+     * Get all permissions
+     *
+     * @return array Returns array of all user permissions
+     */
+    function getUserPermissions(){
+        <...>
+    }
 Since every user model is extended with the same function it is available in both twig and backend php i.e.
 
 **For Twig**
@@ -75,6 +87,14 @@ Since every user model is extended with the same function it is available in bot
 
     {% if user.hasUserPermission([1, 2, "can-eat-cake"], 'one') %}
         <p>This user has one of the above permissions</p>
+    {% else %}
+        <p>This user does not have permission</p>
+    {% endif %}
+
+
+    {% set userpermissions = user.getUserPermissions() %}
+    {% if 'my-permission' in userpermissions %}
+        <p>This user has the above permission</p>
     {% else %}
         <p>This user does not have permission</p>
     {% endif %}
@@ -92,4 +112,6 @@ Since every user model is extended with the same function it is available in bot
     } else {
         // This user does not have permission
     }
+
+
 
