@@ -174,6 +174,15 @@ class Plugin extends \System\Classes\PluginBase
                 }
                 return false;
             });
+            $model->addDynamicMethod('getUserPermissions', function() use ($model) {
+
+                $allowedPermissions = getAllowedPermissions($model);
+                if($allowedPermissions){
+                    return array_pluck($allowedPermissions, 'code');
+                }
+                
+                return false;
+            });
             $model->addDynamicMethod(Config::get('ladylain.userpermissions::hasUserPermissionAlias', 'hasUserPermissionAlias'), function($permissionsInput, $match = 'all') use ($model) {
                 return $model->hasUserPermission($permissionsInput, $match);
             });

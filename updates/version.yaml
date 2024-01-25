@@ -11,3 +11,5 @@
 1.1.3:
     - Fixes issue when using MariaDB.
     - Fixed missing default value for column "permission_state" when attaching a permission to a group.
+1.1.4:
+    - Add new function to get all user permissions in a single query.
